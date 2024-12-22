@@ -8,9 +8,9 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
-import { Product } from './collections/Product'
+import { UsersCollectionConfig } from '@/entities/users'
+import { MediaCollectionConfig } from '@/entities/media'
+import { ProductsCollectionConfig } from '@/entities/products'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,12 +18,12 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     dateFormat: 'dd.MM.yyyy HH:mm:ss',
-    user: Users.slug,
+    user: UsersCollectionConfig.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Product],
+  collections: [UsersCollectionConfig, MediaCollectionConfig, ProductsCollectionConfig],
   i18n: {
     supportedLanguages: {
       ru,
@@ -32,7 +32,7 @@ export default buildConfig({
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(dirname, 'app/payload-types.ts'),
   },
   db: postgresAdapter({
     pool: {

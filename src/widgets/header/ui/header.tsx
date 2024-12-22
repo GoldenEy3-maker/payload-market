@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ThemeToggle } from './theme-toggle'
+import { ThemeToggle } from '@/features/theme'
 
 export function Header() {
   return (
